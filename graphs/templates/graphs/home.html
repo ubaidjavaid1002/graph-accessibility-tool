@@ -53,6 +53,22 @@
 
         {% endif %}
 
+        {% if extracted_text %}
+
+            <div class="mt-8 bg-gray-100 rounded-2xl p-6">
+
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">
+                    Extracted Text
+                </h2>
+
+                <pre class="whitespace-pre-wrap text-gray-600">
+                    {{ extracted_text }}
+                </pre>
+
+            </div>
+
+        {% endif %}
+
     </div>
 
 </body>
