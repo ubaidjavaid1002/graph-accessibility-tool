@@ -43,8 +43,25 @@ def home(request):
 
         form = GraphUploadForm()
 
+    summary = None
+
+    if extracted_text:
+
+        lines = [
+            line.strip()
+            for line in extracted_text.split('\n')
+            if line.strip()
+        ]
+
+        summary = {
+            "total_labels": len(lines),
+            "highest_text": max(lines, key=len) if lines else "N/A",
+            "lowest_text": min(lines, key=len) if lines else "N/A"
+        }
+
     return render(request, 'graphs/home.html', {
         'form': form,
         'uploaded_image': uploaded_image,
-        'extracted_text': extracted_text
+        'extracted_text': extracted_text,
+        'summary': summary,
     })
