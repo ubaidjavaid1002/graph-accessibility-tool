@@ -1,7 +1,7 @@
 from django import forms
-from .models import GraphUpload
+from .models import Graph
 
 class GraphUploadForm(forms.ModelForm):
     class Meta:
-        model = GraphUpload
+        model = Graph
         fields = ['image']

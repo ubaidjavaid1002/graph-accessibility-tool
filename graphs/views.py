@@ -39,6 +39,8 @@ def home(request):
             thresh = cv2.threshold(gray,150,255,cv2.THRESH_BINARY)[1]
 
             extracted_text = pytesseract.image_to_string(thresh)
+            graph.extracted_text = extracted_text
+            graph.save()
     else:
 
         form = GraphUploadForm()
@@ -53,10 +55,29 @@ def home(request):
             if line.strip()
         ]
 
+        numeric_values = []
+
+        text_labels = []
+
+        for line in lines:
+
+            if line.isdigit():
+
+                numeric_values.append(
+                    int(line)
+                )
+
+            else:
+
+                text_labels.append(
+                    line
+                )
+
         summary = {
-            "total_labels": len(lines),
-            "highest_text": max(lines, key=len) if lines else "N/A",
-            "lowest_text": min(lines, key=len) if lines else "N/A"
+            "total_labels": len(text_labels) - 2 ,
+            "labels": text_labels,
+            "min_scale": min(numeric_values) if numeric_values else "N/A",
+            "max_scale": max(numeric_values) if numeric_values else "N/A",
         }
 
     return render(request, 'graphs/home.html', {

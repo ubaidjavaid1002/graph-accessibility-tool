@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import GraphUpload
+from .models import Graph
 
-admin.site.register(GraphUpload)
+admin.site.register(Graph)
